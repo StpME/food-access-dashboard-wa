@@ -114,9 +114,9 @@
         map.addControl(nav, 'bottom-right');
         map.on('load', () => {
 
-            // mapbox basemap (zoom: 4-11) 
-            // placeholder? change zooms or basemap to counties
-            map.addSource('WA-base', {
+            // Add Source
+            
+            /*map.addSource('WA-base', {
                 'type': 'raster',
                 'tiles': [
                     'assets/wa-basemap/{z}/{x}/{y}.png'
@@ -124,8 +124,8 @@
                 'tileSize': 256,
             });
 
-           
-            // basemap - tile 1
+           // Add Layer
+
             map.addLayer({
                 'id': 'WA basemap',
                 'type': 'raster',
@@ -133,10 +133,11 @@
                     'visibility': 'none'
                 },
                 'source': 'king-base'
-            });
-           
-
+            }); */
         });
+
+
+
 
         // Starter code from lab 3 - choropleth layers
         /*
