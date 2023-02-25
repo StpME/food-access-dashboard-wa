@@ -77,3 +77,14 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: bolder;
 }
+/* Navbar */
+#navbar-container {
+    position:relative;
+    z-index: 5;
+    background-color: #975F0B;
+}
+.navbar-brand {
+    color:#fff;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
