@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Food Deserts - Washington</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--For Bootstrapping-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+
+</head>
+
+
+
+<body>
+    <header>
+        <div id="navbar-container"></div>
+    </header>
+    <div id='map'></div>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZGltZW50aW8iLCJhIjoiY2xhMngzZmEyMDRtdDN2bW93MjYyY2hvbSJ9.lBP2u-C8BEgug7_ye16y2g';
+        let map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [-120.79438630057388, 47.53695842091479], // starting position [lng, lat]
+            zoom: 6, // starting zoom
+            projection: 'albers'
+        });
+
+        map.on('load', () => {
+            map.addSource('rates', {
+                type: 'geojson',
+                data: 'WA_QGIS.geojson'
+            });
+
+            map.addLayer({
+                'id': 'covid-rate',
+                'type': 'circle',
+                'source': 'rates',
+                'paint': {
+                    // increase the radii of the circle as the zoom level and dbh value increases
+                    'circle-radius': {
+                        'property': 'MedianFamilyIncome',
+                        'stops': [
+                            [grades[0], radii[0]],
+                            [grades[1], radii[1]],
+                            [grades[2], radii[2]]
+                        ]
+                    },
+                    'circle-color': {
+                        'property': 'MedianFamilyIncome',
+                        'stops': [
+                            [grades[0], colors[0]],
+                            [grades[1], colors[1]],
+                            [grades[2], colors[2]]
+                        ]
+                    },
+                    'circle-stroke-color': 'white',
+                    'circle-stroke-width': 1,
+                    'circle-opacity': 0.6
+                }
+            });
+
+        });
+
+        const grades = [5000, 10000, 15000],
+            colors = ['rgb(208,209,230)', 'rgb(103,169,207)', 'rgb(1,108,89)'],
+            radii = [4, 8, 12];
+
+        map.on('click', 'covid-rate', (event) => {
+            new mapboxgl.Popup()
+                .setLngLat(event.features[0].geometry.coordinates)
+                .setHTML(`<strong>Cases:</strong> ${event.features[0].properties.MedianFamilyIncome}`)
+                .addTo(map);
+        });
+
+        // create legend object, it will anchor to the div element with the id legend.
+        const legend = document.getElementById('legend');
+
+        //set up legend grades and labels
+        var labels = ['<strong>Cases</strong>'],
+            vbreak;
+        //iterate through grades and create a scaled circle and label for each
+        for (var i = 0; i < grades.length; i++) {
+            vbreak = grades[i];
+            // you need to manually adjust the radius of each dot on the legend 
+            // in order to make sure the legend can be properly referred to the dot on the map.
+            dot_radius = 2 * radii[i];
+            labels.push(
+                '<p class="break"><i class="dot" style="background:' + colors[i] + '; width: ' + dot_radius +
+                'px; height: ' +
+                dot_radius + 'px; "></i> <span class="dot-label" style="top: ' + dot_radius / 2 + 'px;">' + vbreak +
+                '</span></p>');
+
+        }
+
+        const source =
+            '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>';
+
+        // combine all the html codes.
+        legend.innerHTML = labels.join('') + source;
+    </script>
+
+</body>
+
+</html>
