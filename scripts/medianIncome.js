@@ -10,7 +10,7 @@ let map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
-    map.addSource('rates', {
+    map.addSource('median', {
         type: 'geojson',
         data: 'assets/WA_QGIS.geojson'
     });
@@ -18,7 +18,7 @@ map.on('load', () => {
     map.addLayer({
         'id': 'median_income',
         'type': 'circle',
-        'source': 'rates',
+        'source': 'median',
         'paint': {
             // increase the radii of the circle as the zoom level and dbh value increases
             'circle-radius': {
@@ -52,7 +52,7 @@ const grades = [5000, 10000, 15000],
 map.on('click', 'median_income', (event) => {
     new mapboxgl.Popup()
         .setLngLat(event.features[0].geometry.coordinates)
-        .setHTML(`<strong>Cases:</strong> ${event.features[0].properties.MedianFamilyIncome}`)
+        .setHTML(`<strong>Median Family Income ($):</strong> ${event.features[0].properties.MedianFamilyIncome}`)
         .addTo(map);
 });
 
@@ -60,7 +60,7 @@ map.on('click', 'median_income', (event) => {
 const legend = document.getElementById('legend');
 
 //set up legend grades and labels
-var labels = ['<strong>Cases</strong>'],
+var labels = ['<strong>Median Family Income ($):</strong>'],
     vbreak;
 //iterate through grades and create a scaled circle and label for each
 for (var i = 0; i < grades.length; i++) {
