@@ -5,7 +5,7 @@ let map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/dark-v11', // style URL
     center: [-120.79438630057388, 47.53695842091479], // starting position [lng, lat]
-    zoom: 6, // starting zoom
+    zoom: 6.7, // starting zoom
     projection: 'mercator'
 });
 
@@ -45,7 +45,7 @@ map.on('load', () => {
 
 });
 
-const grades = [5000, 10000, 15000],
+const grades = [50000, 75000, 100000],
     colors = ['rgb(208,209,230)', 'rgb(103,169,207)', 'rgb(1,108,89)'],
     radii = [4, 8, 12];
 
@@ -76,8 +76,8 @@ for (var i = 0; i < grades.length; i++) {
 
 }
 
-const source =
-    '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>';
+/*const source =
+    '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>'; */
 
 // combine all the html codes.
 legend.innerHTML = labels.join('') + source;

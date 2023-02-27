@@ -1,10 +1,21 @@
+
+// Use this for layer template
+
+
+
+
+
+
+
+
 mapboxgl.accessToken =
     'pk.eyJ1IjoibWl0Y2hlbGxzIiwiYSI6ImNsZWRlaDcwMTAzNDgzcnBjbnFwd24yNzEifQ.ObmlR1g0krQvk3b0S0V3qQ';
 let map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/dark-v10',
     zoom: 6.7, // starting zoom - washington state level
-    center: [-120.7, 47.5] // starting center - washington state
+    center: [-120.79438630057388, 47.53695842091479], // starting center - washington state
+    projection: 'mercator'
 });
 // Full Screen toggle
 map.addControl(new mapboxgl.FullscreenControl(), 'bottom-right');
