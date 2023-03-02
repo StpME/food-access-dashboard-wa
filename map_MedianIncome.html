@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Food Deserts - Washington</title>
+    <title>Map 1: Median Income</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--For Bootstrapping-->
@@ -37,29 +37,32 @@
     </header>
     <div id='map'></div>
     <div id="map"></div>
-    <script>
+    <script>  
         mapboxgl.accessToken =
             'pk.eyJ1IjoiZGltZW50aW8iLCJhIjoiY2xhMngzZmEyMDRtdDN2bW93MjYyY2hvbSJ9.lBP2u-C8BEgug7_ye16y2g';
         let map = new mapboxgl.Map({
             container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            style: 'mapbox://styles/mapbox/dark-v11', // style URL
             center: [-120.79438630057388, 47.53695842091479], // starting position [lng, lat]
-            zoom: 6, // starting zoom
-            projection: 'albers'
+            zoom: 6.5, // starting zoom
+            projection: 'mercator'
         });
-
+        // Full Screen toggle
+        map.addControl(new mapboxgl.FullscreenControl(), 'bottom-right');
+        // Zoom/nav control
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
         map.on('load', () => {
-            map.addSource('rates', {
+            map.addSource('median', {
                 type: 'geojson',
-                data: 'WA_QGIS.geojson'
+                data: 'assets/WA_QGIS.geojson'
             });
 
             map.addLayer({
-                'id': 'covid-rate',
+                'id': 'median_income',
                 'type': 'circle',
-                'source': 'rates',
+                'source': 'median',
                 'paint': {
-                    // increase the radii of the circle as the zoom level and dbh value increases
+                    // increase the radii of the circle (not working)
                     'circle-radius': {
                         'property': 'MedianFamilyIncome',
                         'stops': [
@@ -79,19 +82,23 @@
                     'circle-stroke-color': 'white',
                     'circle-stroke-width': 1,
                     'circle-opacity': 0.6
+
+
+
+                    
                 }
             });
 
         });
 
-        const grades = [5000, 10000, 15000],
+        const grades = [50000, 75000, 100000],
             colors = ['rgb(208,209,230)', 'rgb(103,169,207)', 'rgb(1,108,89)'],
             radii = [4, 8, 12];
 
-        map.on('click', 'covid-rate', (event) => {
+        map.on('click', 'median_income', (event) => {
             new mapboxgl.Popup()
                 .setLngLat(event.features[0].geometry.coordinates)
-                .setHTML(`<strong>Cases:</strong> ${event.features[0].properties.MedianFamilyIncome}`)
+                .setHTML(`<strong>Median Family Income ($):</strong> ${event.features[0].properties.MedianFamilyIncome}`)
                 .addTo(map);
         });
 
@@ -99,7 +106,7 @@
         const legend = document.getElementById('legend');
 
         //set up legend grades and labels
-        var labels = ['<strong>Cases</strong>'],
+        var labels = ['<strong>Median Family Income ($):</strong>'],
             vbreak;
         //iterate through grades and create a scaled circle and label for each
         for (var i = 0; i < grades.length; i++) {
@@ -115,8 +122,8 @@
 
         }
 
-        const source =
-            '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>';
+        /*const source =
+            '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>'; */
 
         // combine all the html codes.
         legend.innerHTML = labels.join('') + source;
