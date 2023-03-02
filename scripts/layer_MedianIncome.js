@@ -20,7 +20,7 @@ map.on('load', () => {
         'type': 'circle',
         'source': 'median',
         'paint': {
-            // increase the radii of the circle as the zoom level and dbh value increases
+            // increase the radii of the circle (not working)
             'circle-radius': {
                 'property': 'MedianFamilyIncome',
                 'stops': [
@@ -40,6 +40,10 @@ map.on('load', () => {
             'circle-stroke-color': 'white',
             'circle-stroke-width': 1,
             'circle-opacity': 0.6
+
+
+
+            
         }
     });
 
