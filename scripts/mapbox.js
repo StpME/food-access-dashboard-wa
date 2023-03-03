@@ -2,12 +2,6 @@
 // Use this for layer template
 
 
-
-
-
-
-
-
 mapboxgl.accessToken =
             'pk.eyJ1IjoiZGltZW50aW8iLCJhIjoiY2xhMngzZmEyMDRtdDN2bW93MjYyY2hvbSJ9.lBP2u-C8BEgug7_ye16y2g';
 let map = new mapboxgl.Map({
@@ -49,31 +43,42 @@ map.on('load', () => {
                     [grades[2], colors[2]]
                 ]
             },
+            'circle-stroke-color': 'green',
+            'circle-stroke-width': 1,
+            'circle-opacity': 0.6
+
+        }
+    });
+
+    map.addLayer({
+        'id': 'median_income2',
+        'type': 'circle',
+        'source': 'median',
+        'paint': {
+            // increase the radii of the circle (not working)
+            'circle-radius': {
+                'property': 'MedianFamilyIncome',
+                'stops': [
+                    [grades[0], radii[0]],
+                    [grades[1], radii[1]],
+                    [grades[2], radii[2]]
+                ]
+            },
+            'circle-color': {
+                'property': 'MedianFamilyIncome',
+                'stops': [
+                    [grades[0], colors[0]],
+                    [grades[1], colors[1]],
+                    [grades[2], colors[2]]
+                ]
+            },
             'circle-stroke-color': 'white',
             'circle-stroke-width': 1,
             'circle-opacity': 0.6
 
-
-
-            
         }
     });
 
-    map.addSource('maine', {
-        'type': 'geojson',
-        'data': 'assets/WA_QGIS.geojson'
-        });
-
-    map.addLayer({
-        'id': 'maine',
-        'type': 'fill',
-        'source': 'maine', // reference the data source
-        'layout': {},
-        'paint': {
-        'fill-color': '#0080ff', // blue color fill
-        'fill-opacity': 0.5
-        }
-        });
 
 });
 

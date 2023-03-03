@@ -48,13 +48,27 @@
       </div>
       <div id="right-side">
         <div id="filter-bar">
-          <button>Race</button>
+          <div class="dropdown">
+            <button class="dropbtn">Race</button>
+            <div class="dropdown-content">
+              <p>White</p>
+              <p href="#">Black</p>
+              <p href="#">Asian</p>
+              <p href="#">Hispanic</p>
+              <p href="#">Native</p>
+              <p href="#">Other</p>
+            </div>
+          </div>
           <button>Age Group</button>
           <button>County</button>
           <div id="food-bank">
             <p>Food Banks</p>
             <label class="switch">
-              <input type="checkbox" onclick="" checked />
+              <input
+                type="checkbox"
+                onclick="handleSwitch('second-layer')"
+                checked
+              />
               <span class="slider round"></span>
             </label>
           </div>
