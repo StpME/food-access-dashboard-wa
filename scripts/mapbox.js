@@ -1,6 +1,29 @@
 
 // Use this for layer template
 
+// which layers are active
+let status = [
+    "median_income-active",
+    "median_income2-active"
+];
+
+// toggles activeness of layer
+function handleSwitch(layer) {
+    let index = 1;
+    if (layer == "median_income") {
+        index = 0;
+    } else if (layer == "median_income2") {
+        index = 1;
+    }
+
+    if (status[index] == layer + "-active") {
+        status[index] = layer;
+        map.setLayoutProperty(layer, "visibility", "none");
+      } else if (status[index] == layer) {
+        status[index] = layer + "-active";
+        map.setLayoutProperty(layer, "visibility", "visible");
+      }
+};
 
 mapboxgl.accessToken =
             'pk.eyJ1IjoiZGltZW50aW8iLCJhIjoiY2xhMngzZmEyMDRtdDN2bW93MjYyY2hvbSJ9.lBP2u-C8BEgug7_ye16y2g';
@@ -117,7 +140,7 @@ for (var i = 0; i < grades.length; i++) {
     '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>'; */
 
 // combine all the html codes.
-legend.innerHTML = labels.join('') + source;
+// legend.innerHTML = labels.join('') + source;
 
 
 
