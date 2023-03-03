@@ -1,30 +1,77 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Food Deserts - Washington</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
-    
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div id="navbar-container"></div>
+      <div id="navbar-container"></div>
     </header>
     <!--Map container-->
-    <div>
-        <div id='map'>
-        <!--Embed of our first map, nav to selected map when filter is clicked when implemented-->
-            <iframe src="map_MedianIncome.html" frameborder="0" width="100%" height="100%" allowfullscreen="" scrolling="no" ></iframe>
+    <div id="container">
+      <div id="side-panel">
+        <h1>Washington Statistics</h1>
+        <p id="description">
+          Identifying which populations in WA state are most susceptible to food
+          insecurity. Click on a census tract to learn more.
+        </p>
+        <div>
+          <h2>place holder</h2>
         </div>
+        <div>
+          <h2>place holder</h2>
+        </div>
+        <div>
+          <h2>place holder</h2>
+        </div>
+        <div>
+          <h2>place holder</h2>
+        </div>
+        <div>
+          <h2>place holder</h2>
+        </div>
+      </div>
+      <div id="right-side">
+        <div id="filter-bar">
+          <button>Race</button>
+          <button>Age Group</button>
+          <button>County</button>
+          <div id="food-bank">
+            <p>Food Banks</p>
+            <label class="switch">
+              <input type="checkbox" onclick="" checked />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div id="map">
+          <!--Embed of our first map, nav to selected map when filter is clicked when implemented-->
+          <!-- <iframe
+            src="map_MedianIncome.html"
+            frameborder="0"
+            width="100%"
+            height="100%"
+            allowfullscreen=""
+            scrolling="no"
+            ></iframe> -->
+        </div>
+      </div>
     </div>
-
-
 
     <!--<div id="title">
         Food Deserts - Washington
@@ -35,10 +82,22 @@
 
     <!--Connect Scripts-->
     <script src="scripts/navbar.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+    <script src="scripts/mapbox.js"></script>
 
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
