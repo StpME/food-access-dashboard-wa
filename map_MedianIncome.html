@@ -63,7 +63,7 @@
     'paint': {
         'fill-color': [
             'step',
-            ['get', 'Pop2010'],
+            ['to-number', ['get', 'Pop2010']], // cast Pop2010 to a number
             '#FFEDA0',   // stop_output_0
             1,          // stop_input_0
             '#FED976',   // stop_output_1
