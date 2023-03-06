@@ -98,8 +98,14 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    
 }
-
+#filter-btn {
+    font-family: 'Inter';
+    font-weight: bold;
+    border-style: solid;
+    box-shadow: 2px 2px ;
+}
 #filter-bar {
     padding: 15px;
     display: flex;
