@@ -137,9 +137,27 @@ for (var i = 0; i < grades.length; i++) {
         'px; height: ' +
         dot_radius + 'px; "></i> <span class="dot-label" style="top: ' + dot_radius / 2 + 'px;">' + vbreak +
         '</span></p>');
-
 }
 
+
+
+
+
+
+// Side Panel
+function showCensusTractStats(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['median_income'] });
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+    var infoPanel = document.getElementById('side-panel');
+    infoPanel.innerHTML = '<h3>Census Tract ' + feature.properties.CensusTract + '</h3>' +
+                       '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
+                       '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>';
+}
+map.on('click', 'median_income', showCensusTractStats);
 /*const source =
     '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>'; */
 
