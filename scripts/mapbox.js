@@ -153,9 +153,7 @@ function showCensusTractStats(e) {
 
     var feature = features[0];
     var infoPanel = document.getElementById('side-panel');
-    infoPanel.innerHTML = 
-                        '<h1 id="title">Washington Statistics</h1>' +
-                        '<p id="description"> Identifying which populations in WA state are most susceptible to food insecurity. Click on a census tract to learn more.</p>' +
+    infoPanel.innerHTML += 
                         '<p>Census Tract: ' + feature.properties.CensusTract + '</p>' +
                         '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
                         '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>';
