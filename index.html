@@ -25,7 +25,7 @@
     <!--Map container-->
     <div id="container">
       <div id="side-panel">
-        <h1>Washington Statistics</h1>
+        <h1 id="title">Washington Statistics</h1>
         <p id="description">
           Identifying which populations in WA state are most susceptible to food
           insecurity. Click on a census tract to learn more.
@@ -86,19 +86,6 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // test toggles visibility for an entire map (one possible way to display?)
-      document.getElementById("white").addEventListener("click", function() {
-        const mapElement = document.querySelector('#map');
-        if (mapElement.style.visibility === 'hidden') {
-          mapElement.style.visibility = 'visible';
-        } else {
-          mapElement.style.visibility = 'hidden';
-        }
-      });
-    </script>
-
 
     <!--Connect Scripts-->
     <script src="scripts/navbar.js"></script>
