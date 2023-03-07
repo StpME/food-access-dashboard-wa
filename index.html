@@ -51,39 +51,38 @@
           <div class="dropdown">
             <button class="dropbtn" id="filter-btn">Race</button>
             <div class="dropdown-content">
-              <p id="white">White</p>
-              <p id="black">Black</p>
-              <p id="asian">Asian</p>
-              <p id="hisp">Hispanic</p>
-              <p id="native">Native</p>
-              <p id="other">Other</p>
+              <p id="white" onclick="handleSwitch('lawhitehalf')">White</p>
+              <p id="black" onclick="handleSwitch('lablackhalf')">Black</p>
+              <p id="asian" onclick="handleSwitch('laasianhalf')">Asian</p>
+              <p id="hisp" onclick="handleSwitch('lahisphalf')">Hispanic</p>
+              <p id="native" onclick="handleSwitch('laaianhalf')">Native</p>
+              <p id="hi/pi" onclick="handleSwitch('lanhopihalf')">Hawaiian/PacIsl</p>
+              <p id="other" onclick="handleSwitch('laomultirhalf')">Other/Mixed</p>
             </div>
           </div>
-          <button class="dropbtn" id="filter-btn">Age Group</button>
-          <button class="dropbtn" id="filter-btn">County</button>
+          <div class="dropdown"> 
+            <button class="dropbtn" id="filter-btn">Other</button>
+            <div class="dropdown-content">
+              <p id="" onclick="handleSwitch('lakidshalf')">Kids</p>
+              <p id="" onclick="handleSwitch('laseniorshalf')">Seniors</p>
+              <p id="" onclick="handleSwitch('lalowihalf')">Low Income</p>
+              <p id="" onclick="handleSwitch('lahunvhalf')">No Vehicle</p>
+            </div>
+          </div>
+          <!-- <button class="dropbtn" id="filter-btn">County</button>
           <div id="food-bank">
             <p>Food Banks</p>
             <label class="switch">
               <input
                 type="checkbox"
-                onclick="handleSwitch('median_income2')"
+                onclick="handleSwitch('median_income')"
                 checked
               />
               <span class="slider round"></span>
             </label>
-          </div>
+          </div> -->
         </div>
-        <div id="map">
-          <!--Embed of our first map, nav to selected map when filter is clicked when implemented-->
-          <!-- <iframe
-            src="map_MedianIncome.html"
-            frameborder="0"
-            width="100%"
-            height="100%"
-            allowfullscreen=""
-            scrolling="no"
-            ></iframe> -->
-        </div>
+        <div id="map"></div>
       </div>
     </div>
 
@@ -102,8 +101,8 @@
 
     <!--Connect Scripts-->
     <script src="scripts/navbar.js"></script>
-    <script src="scripts/test.js"></script>
-    <!--<script src="scripts/mapbox.js"></script>-->
+    <!-- <script src="scripts/test.js"></script> -->
+    <script src="scripts/mapbox.js"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

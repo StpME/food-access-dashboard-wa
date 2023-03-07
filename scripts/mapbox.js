@@ -1,28 +1,80 @@
 
 // Use this for layer template
 
-// which layers are active
-let status = [
-    "median_income-active",
-    "median_income2-active"
-];
+let variable = "LAhalfand10";
+let previousVariable = variable;
+// // which layers are active
+// let status = [
+//     "a-active",
+//     "lakids",
+//     "laseniors",
+//     "lalowi",
+//     "lahunv",
+//     "laasian",
+//     "lawhite",
+//     "lablack",
+//     "lahisp",
+//     "laaian",
+//     "lanhopi",
+//     "laomultir"
+// ];
 
-// toggles activeness of layer
-function handleSwitch(layer) {
-    let index = 1;
-    if (layer == "median_income") {
-        index = 0;
-    } else if (layer == "median_income2") {
-        index = 1;
-    }
+// // toggles activeness of layer
+function handleSwitch(filterVar) {
+    variable = filterVar;
+    console.log(variable)
+    // let index = 0;
+    // if (layer == "lakids") {
+    //     index = 1;
+    // } else if (layer == "laseniors") {
+    //     index = 2;
+    // } else if (layer == "lalowi") {
+    //     index = 3;
+    // } else if (layer == "lahunv") {
+    //     index = 4;
+    // } else if (layer == "laasian") {
+    //     index = 5;
+    // } else if (layer == "lawhite") {
+    //     index = 6;
+    // } else if (layer == "lablack") {
+    //     index = 7;
+    // } else if (layer == "lahisp") {
+    //     index = 8;
+    // } else if (layer == "laaianhalf") {
+    //     index = 9;
+    // } else if (layer == "lanhopi") {
+    //     index = 10;
+    // } else if (layer == "laomultir") {
+    //     index = 11;
+    // } 
 
-    if (status[index] == layer + "-active") {
-        status[index] = layer;
-        map.setLayoutProperty(layer, "visibility", "none");
-      } else if (status[index] == layer) {
-        status[index] = layer + "-active";
-        map.setLayoutProperty(layer, "visibility", "visible");
-      }
+    // if (status[index] == layer + "-active") {
+    //     status[index] = layer;
+    //     map.setLayoutProperty(layer, "visibility", "none");
+    //   } else if (status[index] == layer) {
+    //     status[index] = layer + "-active";
+    //     map.setLayoutProperty(layer, "visibility", "visible");
+    //   }
+
+    map.setPaintProperty("a", 'fill-color', [
+        'step',
+        ['to-number', ['get', variable]],
+        '#FFEDA0',   // stop_output_0
+        1,          // stop_input_0
+        '#FED976',   // stop_output_1
+        5,          // stop_input_1
+        '#FEB24C',   // stop_output_2
+        10,          // stop_input_2
+        '#FD8D3C',   // stop_output_3
+        20,         // stop_input_3
+        '#FC4E2A',   // stop_output_4
+        100,         // stop_input_4
+        '#E31A1C',   // stop_output_5
+        500,         // stop_input_5
+        '#BD0026',   // stop_output_6
+        1000,        // stop_input_6
+        "#800026"    // stop_output_7
+    ]);
 };
 
 mapboxgl.accessToken =
@@ -43,71 +95,404 @@ map.dragRotate.disable();
 map.touchZoomRotate.disableRotation();
 
 map.on('load', () => {
-    map.addSource('median', {
+    map.addSource('WA_QGIS', {
         type: 'geojson',
-        data: 'assets/WA_QGIS.geojson'
+        data: 'assets/WA_POLYGON.geojson'
     });
+    console.log(variable);
+    console.log("heyheyheyhey");
+    // map.addLayer({
+    //     'id': 'a',
+    //     'type': 'circle',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         // increase the radii of the circle (not working)
+    //         'circle-radius': {
+    //             'property': 'MedianFamilyIncome',
+    //             'stops': [
+    //                 [grades[0], radii[0]],
+    //                 [grades[1], radii[1]],
+    //                 [grades[2], radii[2]]
+    //             ]
+    //         },
+    //         'circle-color': {
+    //             'property': 'MedianFamilyIncome',
+    //             'stops': [
+    //                 [grades[0], colors[0]],
+    //                 [grades[1], colors[1]],
+    //                 [grades[2], colors[2]]
+    //             ]
+    //         },
+    //         'circle-stroke-color': 'green',
+    //         'circle-stroke-width': 1,
+    //         'circle-opacity': 0.6
 
+    //     }
+    // });
+
+    // median income layer
     map.addLayer({
-        'id': 'median_income',
-        'type': 'circle',
-        'source': 'median',
+        'id': 'a',
+        'type': 'fill',
+        'source': 'WA_QGIS',
         'paint': {
-            // increase the radii of the circle (not working)
-            'circle-radius': {
-                'property': 'MedianFamilyIncome',
-                'stops': [
-                    [grades[0], radii[0]],
-                    [grades[1], radii[1]],
-                    [grades[2], radii[2]]
-                ]
-            },
-            'circle-color': {
-                'property': 'MedianFamilyIncome',
-                'stops': [
-                    [grades[0], colors[0]],
-                    [grades[1], colors[1]],
-                    [grades[2], colors[2]]
-                ]
-            },
-            'circle-stroke-color': 'green',
-            'circle-stroke-width': 1,
-            'circle-opacity': 0.6
-
+            'fill-color': [
+                'step',
+                ['to-number', ['get', variable]], // cast Pop2010 to a number
+                '#FFEDA0',   // stop_output_0
+                1,          // stop_input_0
+                '#FED976',   // stop_output_1
+                5,          // stop_input_1
+                '#FEB24C',   // stop_output_2
+                10,          // stop_input_2
+                '#FD8D3C',   // stop_output_3
+                20,         // stop_input_3
+                '#FC4E2A',   // stop_output_4
+                100,         // stop_input_4
+                '#E31A1C',   // stop_output_5
+                500,         // stop_input_5
+                '#BD0026',   // stop_output_6
+                1000,        // stop_input_6
+                "#800026"    // stop_output_7
+            ],
+            'fill-outline-color': '#BBBBBB',
+            'fill-opacity': 0.7,
         }
     });
 
-    map.addLayer({
-        'id': 'median_income2',
-        'type': 'circle',
-        'source': 'median',
-        'paint': {
-            // increase the radii of the circle (not working)
-            'circle-radius': {
-                'property': 'MedianFamilyIncome',
-                'stops': [
-                    [grades[0], radii[0]],
-                    [grades[1], radii[1]],
-                    [grades[2], radii[2]]
-                ]
-            },
-            'circle-color': {
-                'property': 'MedianFamilyIncome',
-                'stops': [
-                    [grades[0], colors[0]],
-                    [grades[1], colors[1]],
-                    [grades[2], colors[2]]
-                ]
-            },
-            'circle-stroke-color': 'white',
-            'circle-stroke-width': 1,
-            'circle-opacity': 0.6
+    // // children layer
+    // map.addLayer({
+    //     'id': 'lakids',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
 
-        }
-    });
+    // // seniors layer
+    // map.addLayer({
+    //     'id': 'laseniors',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // low income layer
+    // map.addLayer({
+    //     'id': 'lalowi',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // no vehicle layer
+    // map.addLayer({
+    //     'id': 'lahunv',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // asian layer
+    // map.addLayer({
+    //     'id': 'laasian',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // white layer
+    // map.addLayer({
+    //     'id': 'lawhite',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#0E6251',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#0E6251',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#0E6251',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // black layer
+    // map.addLayer({
+    //     'id': 'lablack',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // hispanic layer
+    // map.addLayer({
+    //     'id': 'lahisp',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // american indian and alaska native layer
+    // map.addLayer({
+    //     'id': 'laaian',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // native hawaiian and other pacific islander
+    // map.addLayer({
+    //     'id': 'lanhopi',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
+
+    // // Other/Mixed Race layer
+    // map.addLayer({
+    //     'id': 'laomultir',
+    //     'type': 'fill',
+    //     'source': 'WA_QGIS',
+    //     'paint': {
+    //         'fill-color': [
+    //             'step',
+    //             ['to-number', ['get', variable]], // cast Pop2010 to a number
+    //             '#FFEDA0',   // stop_output_0
+    //             1,          // stop_input_0
+    //             '#FED976',   // stop_output_1
+    //             5,          // stop_input_1
+    //             '#FEB24C',   // stop_output_2
+    //             10,          // stop_input_2
+    //             '#FD8D3C',   // stop_output_3
+    //             20,         // stop_input_3
+    //             '#FC4E2A',   // stop_output_4
+    //             100,         // stop_input_4
+    //             '#E31A1C',   // stop_output_5
+    //             500,         // stop_input_5
+    //             '#BD0026',   // stop_output_6
+    //             1000,        // stop_input_6
+    //             "#800026"    // stop_output_7
+    //         ],
+    //         'fill-outline-color': '#BBBBBB',
+    //         'fill-opacity': 0.7,
+    //     }
+    // });
 
 
 });
+
 
 const grades = [50000, 75000, 100000],
     colors = ['rgb(208,209,230)', 'rgb(103,169,207)', 'rgb(1,108,89)'],
@@ -158,7 +543,7 @@ map.addLayer({
         'paint': {
             'fill-color': [
                 'step',
-                ['get', 'rates'],
+                ['get', variable],
                 '#FFEDA0',   // stop_output_0
                 19,          // stop_input_0
                 '#FED976',   // stop_output_1
