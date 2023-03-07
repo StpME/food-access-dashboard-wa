@@ -153,10 +153,11 @@ function showCensusTractStats(e) {
 
     var feature = features[0];
     var infoPanel = document.getElementById('side-panel');
-    infoPanel.innerHTML += 
-                        '<p>Census Tract: ' + feature.properties.CensusTract + '</p>' +
-                        '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
-                        '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>';
+    infoPanel.innerHTML = '<h3>Census Tract ' + feature.properties.CensusTract + '</h3>' +
+                       '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
+                       '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>'
+                       '<p>Senior Percentage: ' + feature.properties.laseniorhalfshare + '</p>'
+                       '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
 }
 map.on('click', 'median_income', showCensusTractStats);
 /*const source =
