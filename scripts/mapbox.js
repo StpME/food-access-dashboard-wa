@@ -522,9 +522,46 @@ for (var i = 0; i < grades.length; i++) {
         'px; height: ' +
         dot_radius + 'px; "></i> <span class="dot-label" style="top: ' + dot_radius / 2 + 'px;">' + vbreak +
         '</span></p>');
-
 }
 
+
+
+
+
+
+// Side Panel
+var infoPanel = document.getElementById('side-panel');
+var initialContent = infoPanel.innerHTML;
+function showCensusTractStats(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['median_income'] });
+    if (!features.length) {
+        return;
+    }
+    var feature = features[0];
+
+
+
+    
+    //console.log(initialContent)
+    var newValue =  
+                '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
+                '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>' +
+                '<p>Senior Percentage: ' + feature.properties.laseniorshalfshare + '</p>' +
+                '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
+
+    if (infoPanel.innerHTML === initialContent) {
+        // If not, modify the content of the element.
+        infoPanel.insertAdjacentHTML('beforeend', newValue)
+                               
+    } else {
+        console.log(initialContent);
+        // If so, restore the initial content of the element.
+        
+        infoPanel.innerHTML = initialContent;
+    }
+
+}
+map.on('click', 'median_income', showCensusTractStats);
 /*const source =
     '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>'; */
 

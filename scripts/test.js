@@ -101,6 +101,7 @@ map.on('mousemove', ({point}) => {
 });
 
 
+
         //     map.addLayer({
         //         'id': 'median_income',
         //         'type': 'circle',
