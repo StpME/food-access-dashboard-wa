@@ -83,7 +83,7 @@ let map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/dark-v11', // style URL
     center: [-120.79438630057388, 47.53695842091479], // starting position [lng, lat]
-    zoom: 6.5, // starting zoom
+    zoom: 6.2, // starting zoom
     projection: 'mercator'
 });
 // Full Screen toggle
