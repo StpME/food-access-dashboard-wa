@@ -532,36 +532,26 @@ for (var i = 0; i < grades.length; i++) {
 // Side Panel
 var infoPanel = document.getElementById('side-panel');
 var initialContent = infoPanel.innerHTML;
+
 function showCensusTractStats(e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['median_income'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['a'] });
+    console.log(features);
     if (!features.length) {
         return;
     }
     var feature = features[0];
-
-
-
-    
-    //console.log(initialContent)
     var newValue =  
                 '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
                 '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>' +
                 '<p>Senior Percentage: ' + feature.properties.laseniorshalfshare + '</p>' +
                 '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
-
-    if (infoPanel.innerHTML === initialContent) {
-        // If not, modify the content of the element.
-        infoPanel.insertAdjacentHTML('beforeend', newValue)
-                               
-    } else {
-        console.log(initialContent);
-        // If so, restore the initial content of the element.
+    infoPanel.innerHTML = 
         
-        infoPanel.innerHTML = initialContent;
-    }
-
+        '<h1 id="title">Washington Statistics</h1>' +
+        '<p id="description"> Identifying which populations in WA state are most susceptible to food insecurity. Click on a census tract to learn more.</p>' +
+        newValue
 }
-map.on('click', 'median_income', showCensusTractStats);
+map.on('click', 'a', showCensusTractStats);
 /*const source =
     '<p style="text-align: right; font-size:10pt">Source: <a href="https://github.com/nytimes/covid-19-data/blob/43d32dde2f87bd4dafbb7d23f5d9e878124018b8/live/us-counties.csv">NYTimes</a></p>'; */
 
