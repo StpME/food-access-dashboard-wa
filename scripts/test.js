@@ -12,6 +12,10 @@
         map.addControl(new mapboxgl.FullscreenControl(), 'bottom-right');
         // Zoom/nav control
         map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+        // Prevent user from tilting or rotating
+        map.dragRotate.disable();
+        map.touchZoomRotate.disableRotation();
+        
         map.on('load', () => {
             map.addSource('median', {
                 type: 'geojson',
