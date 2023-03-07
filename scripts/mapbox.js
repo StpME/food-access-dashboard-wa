@@ -145,19 +145,36 @@ for (var i = 0; i < grades.length; i++) {
 
 
 // Side Panel
+var infoPanel = document.getElementById('side-panel');
+var initialContent = infoPanel.innerHTML;
 function showCensusTractStats(e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['median_income'] });
     if (!features.length) {
         return;
     }
-
     var feature = features[0];
-    var infoPanel = document.getElementById('side-panel');
-    infoPanel.innerHTML = '<h3>Census Tract ' + feature.properties.CensusTract + '</h3>' +
-                       '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
-                       '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>'
-                       '<p>Senior Percentage: ' + feature.properties.laseniorhalfshare + '</p>'
-                       '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
+
+
+
+    
+    //console.log(initialContent)
+    var newValue =  
+                '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
+                '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>' +
+                '<p>Senior Percentage: ' + feature.properties.laseniorshalfshare + '</p>' +
+                '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
+
+    if (infoPanel.innerHTML === initialContent) {
+        // If not, modify the content of the element.
+        infoPanel.insertAdjacentHTML('beforeend', newValue)
+                               
+    } else {
+        console.log(initialContent);
+        // If so, restore the initial content of the element.
+        
+        infoPanel.innerHTML = initialContent;
+    }
+
 }
 map.on('click', 'median_income', showCensusTractStats);
 /*const source =
