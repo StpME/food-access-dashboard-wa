@@ -547,8 +547,7 @@ function showCensusTractStats(e) {
                 '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
     infoPanel.innerHTML = 
         
-        '<h1 id="title">Washington Statistics</h1>' +
-        '<p id="description"> Identifying which populations in WA state are most susceptible to food insecurity. Click on a census tract to learn more.</p>' +
+        initialContent +
         newValue
 }
 map.on('click', 'a', showCensusTractStats);
