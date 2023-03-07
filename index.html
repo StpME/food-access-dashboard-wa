@@ -51,12 +51,12 @@
           <div class="dropdown">
             <button class="dropbtn" id="filter-btn">Race</button>
             <div class="dropdown-content">
-              <p>White</p>
-              <p href="#">Black</p>
-              <p href="#">Asian</p>
-              <p href="#">Hispanic</p>
-              <p href="#">Native</p>
-              <p href="#">Other</p>
+              <p id="white">White</p>
+              <p id="black">Black</p>
+              <p id="asian">Asian</p>
+              <p id="hisp">Hispanic</p>
+              <p id="native">Native</p>
+              <p id="other">Other</p>
             </div>
           </div>
           <button class="dropbtn" id="filter-btn">Age Group</button>
@@ -87,16 +87,23 @@
       </div>
     </div>
 
-    <!--<div id="title">
-        Food Deserts - Washington
-    </div>
-    <div id="desc">
-        Description
-    </div><-->
+    <script>
+      // test toggles visibility for an entire map (one possible way to display?)
+      document.getElementById("white").addEventListener("click", function() {
+        const mapElement = document.querySelector('#map');
+        if (mapElement.style.visibility === 'hidden') {
+          mapElement.style.visibility = 'visible';
+        } else {
+          mapElement.style.visibility = 'hidden';
+        }
+      });
+    </script>
+
 
     <!--Connect Scripts-->
     <script src="scripts/navbar.js"></script>
     <script src="scripts/test.js"></script>
+    <script src="scripts/test1.js"></script>
     <!--<script src="scripts/mapbox.js"></script>-->
 
     <script

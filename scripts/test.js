@@ -19,31 +19,32 @@
             });
 
             map.addLayer({
-    'id': 'median_income',
-    'type': 'fill',
-    'source': 'median',
-    'paint': {
-        'fill-color': [
-            'step',
-            ['to-number', ['get', 'Pop2010']], // cast Pop2010 to a number
-            '#FFEDA0',   // stop_output_0
-            1,          // stop_input_0
-            '#FED976',   // stop_output_1
-            5,          // stop_input_1
-            '#FEB24C',   // stop_output_2
-            10,          // stop_input_2
-            '#FD8D3C',   // stop_output_3
-            20,         // stop_input_3
-            '#FC4E2A',   // stop_output_4
-            100,         // stop_input_4
-            '#E31A1C',   // stop_output_5
-            500,         // stop_input_5
-            '#BD0026',   // stop_output_6
-            1000,        // stop_input_6
-            "#800026"    // stop_output_7
-        ],
-        'fill-outline-color': '#BBBBBB',
-        'fill-opacity': 0.7,
+                'id': 'median_income',
+                'type': 'fill',
+                'source': 'median',
+                
+                'paint': {
+                'fill-color': [
+                    'step',
+                    ['to-number', ['get', 'Pop2010']], // cast Pop2010 to a number
+                    '#FFEDA0',   // stop_output_0
+                    1,          // stop_input_0
+                    '#FED976',   // stop_output_1
+                    5,          // stop_input_1
+                    '#FEB24C',   // stop_output_2
+                    10,          // stop_input_2
+                    '#FD8D3C',   // stop_output_3
+                    20,         // stop_input_3
+                    '#FC4E2A',   // stop_output_4
+                    100,         // stop_input_4
+                    '#E31A1C',   // stop_output_5
+                    500,         // stop_input_5
+                    '#BD0026',   // stop_output_6
+                    1000,        // stop_input_6
+                    "#800026"    // stop_output_7
+                ],
+                'fill-outline-color': '#BBBBBB',
+                'fill-opacity': 0.7,
     }
 });
 });
@@ -94,6 +95,7 @@ map.on('mousemove', ({point}) => {
         `<h3>${state[0].properties.name}</h3><p><strong><em>${state[0].properties.Pop2010}</strong> people per square mile</em></p>` :
         `<p>Hover over a state!</p>`;
 });
+
 
         //     map.addLayer({
         //         'id': 'median_income',
