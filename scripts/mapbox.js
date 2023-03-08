@@ -194,22 +194,27 @@ function showCensusTractStats(e) {
                 '<p>Senior Rate (%): missing</p>' +
                 '<p>Poverty Rate: missing</p>';
     }
-    var newValue =
-                '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
-                '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>' +
-                '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
-                '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
-    infoPanel.innerHTML = 
-
-        initialContent +
-        newValue
-
-    let zoomCoord = [feature.properties.INTPTLON, feature.properties.INTPTLAT,];
-        map.flyTo({
-            center: zoomCoord,
-            zoom: 8,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
+    else {
+        var newContent =  
+                    '<h1>' + feature.properties.County + '</h1>' +
+                    '<p>Population: ' + formatter(feature.properties.Pop2010) + '</p>' +
+                    '<p>Median Income: $' + formatter(feature.properties.MedianFamilyIncome) + '</p>' +
+                    '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
+                    '<p>Poverty Rate: (%): ' + feature.properties.PovertyRate + '</p>';
+        infoPanel.innerHTML = initialContent + newContent
+    }
 }
+// Casts value to str & adds a comma every 3 letter then returns the new str. 
+function formatter(value) {
+    str_value = String(value);
+    var regex = /(\d)(?=(\d{3})+$)/g;
+    return str_value.replace(regex, '$1,');
+} 
 map.on('click', 'a', showCensusTractStats);
 
+// let zoomCoord = [feature.properties.INTPTLON, feature.properties.INTPTLAT,];
+//         map.flyTo({
+//             center: zoomCoord,
+//             zoom: 8,
+//             essential: true // this animation is considered essential with respect to prefers-reduced-motion
+//             });
