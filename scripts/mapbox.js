@@ -197,7 +197,12 @@ function showCensusTractStats(e) {
 
     // If tract is invalid/missing key props, reset to default values
     if (feature.properties.Pop2010 === undefined || feature.properties.Pop2010 === null) {
-        infoPanel.innerHTML = initialContent
+        var newContent =  
+        '<p>Population: missing </p>' +
+        '<p>Median Income: missing</p>' +
+        '<p>Senior Rate (%): missing</p>' +
+        '<p>Poverty Rate: (%): missing</p>';
+        infoPanel.innerHTML = initialContent + newContent
     }
     else {
         var newContent =  
