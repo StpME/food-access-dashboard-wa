@@ -192,7 +192,6 @@ function showCensusTractStats(e) {
         infoPanel.innerHTML = initialContent
     }
     else {
-        formatter(feature.properties.MedianFamilyIncome);
         var newContent =  
                     '<h1>' + feature.properties.County + '</h1>' +
                     '<p>Population: ' + formatter(feature.properties.Pop2010) + '</p>' +
