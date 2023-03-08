@@ -187,19 +187,25 @@ function showCensusTractStats(e) {
         return;
     }
     var feature = features[0];
-    var newContent =  
-                '<h1>' + feature.properties.County + '</h1>' +
-                '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
-                '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>' +
-                '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
-                '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
-    infoPanel.innerHTML = initialContent + newContent
+    // If tract is invalid/missing key props, reset to default values
+    if (feature.properties.Pop2010 === undefined || feature.properties.Pop2010 === null) {
+        infoPanel.innerHTML = initialContent
+    }
+    else {
+        var newContent =  
+                    '<h1>' + feature.properties.County + '</h1>' +
+                    '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
+                    '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>' +
+                    '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
+                    '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
+        infoPanel.innerHTML = initialContent + newContent
+    }
 }
+map.on('click', 'a', showCensusTractStats);
+
 let zoomCoord = [feature.properties.INTPTLON, feature.properties.INTPTLAT,];
         map.flyTo({
             center: zoomCoord,
             zoom: 8,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
-map.on('click', 'a', showCensusTractStats);
-
