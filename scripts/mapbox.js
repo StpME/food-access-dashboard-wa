@@ -38,7 +38,7 @@ let map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/dark-v11', // style URL
     center: [-120.79438630057388, 47.53695842091479], // starting position [lng, lat]
-    zoom: 6.2, // starting zoom
+    zoom: 5.9, // starting zoom
     projection: 'mercator'
 });
 // Full Screen toggle
@@ -66,7 +66,7 @@ map.on('load', () => {
         'paint': {
             'fill-color': [
                 'step',
-                ['to-number', ['get', variable]], // cast Pop2010 to a number
+                ['coalesce' , ['to-number', ['get', variable]], 0], // cast Pop2010 to a number
                 '#FFEDA0',   // stop_output_0
                 20,          // stop_input_0
                 '#FED976',   // stop_output_1
@@ -187,11 +187,21 @@ function showCensusTractStats(e) {
         return;
     }
     var feature = features[0];
+    if (feature.properties.Pop2010 === undefined) {
+        console.log("if branch");
+        var newValue =
+                '<p>Population: missing</p>' +
+                '<p>Median Income: missing</p>' +
+                '<p>Senior Rate (%): missing</p>' +
+                '<p>Poverty Rate: missing</p>';
+    } else {
+        console.log("else branch");
     var newValue =
                 '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
                 '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>' +
                 '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
                 '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
+    }
     infoPanel.innerHTML = 
 
         initialContent +
