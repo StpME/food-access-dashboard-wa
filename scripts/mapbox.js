@@ -187,21 +187,18 @@ function showCensusTractStats(e) {
         return;
     }
     var feature = features[0];
-    if (feature.properties.Pop2010 === undefined) {
-        console.log("if branch");
+    if (feature === undefined) {
         var newValue =
                 '<p>Population: missing</p>' +
                 '<p>Median Income: missing</p>' +
                 '<p>Senior Rate (%): missing</p>' +
                 '<p>Poverty Rate: missing</p>';
-    } else {
-        console.log("else branch");
+    }
     var newValue =
                 '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
                 '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>' +
                 '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
                 '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
-    }
     infoPanel.innerHTML = 
 
         initialContent +
