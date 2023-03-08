@@ -187,12 +187,17 @@ function showCensusTractStats(e) {
         return;
     }
     var feature = features[0];
-    if (feature === undefined) {
-        var newValue =
-                '<p>Population: missing</p>' +
-                '<p>Median Income: missing</p>' +
-                '<p>Senior Rate (%): missing</p>' +
-                '<p>Poverty Rate: missing</p>';
+    // Zoom to tract on-click
+    let zoomCoord = [feature.properties.INTPTLON, feature.properties.INTPTLAT,];
+         map.flyTo({
+             center: zoomCoord,
+             zoom: 8,
+             essential: true // this animation is considered essential with respect to prefers-reduced-motion
+             });
+
+    // If tract is invalid/missing key props, reset to default values
+    if (feature.properties.Pop2010 === undefined || feature.properties.Pop2010 === null) {
+        infoPanel.innerHTML = initialContent
     }
     else {
         var newContent =  
@@ -205,16 +210,11 @@ function showCensusTractStats(e) {
     }
 }
 // Casts value to str & adds a comma every 3 letter then returns the new str. 
+map.on('click', 'a', showCensusTractStats);
+
 function formatter(value) {
     str_value = String(value);
     var regex = /(\d)(?=(\d{3})+$)/g;
     return str_value.replace(regex, '$1,');
 } 
-map.on('click', 'a', showCensusTractStats);
-
-// let zoomCoord = [feature.properties.INTPTLON, feature.properties.INTPTLAT,];
-//         map.flyTo({
-//             center: zoomCoord,
-//             zoom: 8,
-//             essential: true // this animation is considered essential with respect to prefers-reduced-motion
-//             });
+ 
