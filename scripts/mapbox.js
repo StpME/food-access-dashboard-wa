@@ -531,24 +531,22 @@ for (var i = 0; i < grades.length; i++) {
 
 // Side Panel
 var infoPanel = document.getElementById('side-panel');
+// Initial Title/Description from index
 var initialContent = infoPanel.innerHTML;
 
 function showCensusTractStats(e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['a'] });
-    console.log(features);
     if (!features.length) {
         return;
     }
     var feature = features[0];
-    var newValue =  
+    var newContent =  
+                '<h1>' + feature.properties.County + '</h1>' +
                 '<p>Population: ' + feature.properties.Pop2010 + '</p>' +
-                '<p>Median Income: ' + feature.properties.MedianFamilyIncome + '</p>' +
-                '<p>Senior Percentage: ' + feature.properties.laseniorshalfshare + '</p>' +
+                '<p>Median Income: $' + feature.properties.MedianFamilyIncome + '</p>' +
+                '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
                 '<p>Poverty Rate: ' + feature.properties.PovertyRate + '</p>';
-    infoPanel.innerHTML = 
-        
-        initialContent +
-        newValue
+    infoPanel.innerHTML = initialContent + newContent
 }
 map.on('click', 'a', showCensusTractStats);
 /*const source =
