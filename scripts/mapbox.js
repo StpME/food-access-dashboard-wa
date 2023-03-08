@@ -198,19 +198,20 @@ function showCensusTractStats(e) {
     // If tract is invalid/missing key props, reset to default values
     if (feature.properties.Pop2010 === undefined || feature.properties.Pop2010 === null) {
         var newContent =  
-        '<p>Population: missing </p>' +
-        '<p>Median Income: missing</p>' +
-        '<p>Senior Rate (%): missing</p>' +
-        '<p>Poverty Rate: (%): missing</p>';
+        '<h3><b>County</3>: missing</h1>' +
+        '<p><b>Population:</b> missing </p>' +
+        '<p><b>Median Income:</b> missing</p>' +
+        '<p><b>Senior Rate (%):</b> missing</p>' +
+        '<p><b>Poverty Rate: (%):</b> missing</p>';
         infoPanel.innerHTML = initialContent + newContent
     }
     else {
         var newContent =  
-                    '<h1>' + feature.properties.County + '</h1>' +
-                    '<p>Population: ' + formatter(feature.properties.Pop2010) + '</p>' +
-                    '<p>Median Income: $' + formatter(feature.properties.MedianFamilyIncome) + '</p>' +
-                    '<p>Senior Rate (%): ' + feature.properties.laseniorshalfshare + '</p>' +
-                    '<p>Poverty Rate: (%): ' + feature.properties.PovertyRate + '</p>';
+                    '<h3><b>' + feature.properties.County + '</b></h3>' +
+                    '<p><b>Population:</b> ' + formatter(feature.properties.Pop2010) + '</p>' +
+                    '<p><b>Median Income:</b> $' + formatter(feature.properties.MedianFamilyIncome) + '</p>' +
+                    '<p><b>Senior Rate (%):</b> ' + feature.properties.laseniorshalfshare + '</p>' +
+                    '<p><b>Poverty Rate: (%):</b> ' + feature.properties.PovertyRate + '</p>';
         infoPanel.innerHTML = initialContent + newContent
     }
 }
