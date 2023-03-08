@@ -209,9 +209,9 @@ function showCensusTractStats(e) {
         infoPanel.innerHTML = initialContent + newContent
     }
 }
-// Casts value to str & adds a comma every 3 letter then returns the new str. 
 map.on('click', 'a', showCensusTractStats);
 
+// Casts value to str & adds a comma every 3 letter then returns the new str. 
 function formatter(value) {
     str_value = String(value);
     var regex = /(\d)(?=(\d{3})+$)/g;
