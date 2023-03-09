@@ -1,7 +1,7 @@
 
 
 
-let variable = "LAhalfand10";
+let variable = "LATracts_half";
 let previousVariable = variable;
 
 
@@ -15,19 +15,19 @@ function handleSwitch(filterVar) {
         'step',
         ['to-number', ['get', variable]],
         '#FFEDA0',   // stop_output_0
-        20,          // stop_input_0
+        5,          // stop_input_0
         '#FED976',   // stop_output_1
-        50,          // stop_input_1
+        10,          // stop_input_1
         '#FEB24C',   // stop_output_2
-        100,          // stop_input_2
+        20,          // stop_input_2
         '#FD8D3C',   // stop_output_3
-        500,         // stop_input_3
+        40,         // stop_input_3
         '#FC4E2A',   // stop_output_4
-        1000,         // stop_input_4
-        '#E31A1C',   // stop_output_5
-        2000,         // stop_input_5
-        '#BD0026',   // stop_output_6
-        5000,        // stop_input_6
+        60,         // stop_input_4
+        // '#E31A1C',   // stop_output_5
+        // 2000,         // stop_input_5
+        // '#BD0026',   // stop_output_6
+        // 5000,        // stop_input_6
         "#800026"
     ]);
 };
@@ -68,20 +68,20 @@ map.on('load', () => {
                 'step',
                 ['coalesce' , ['to-number', ['get', variable]], 0], // cast Pop2010 to a number
                 '#FFEDA0',   // stop_output_0
-                20,          // stop_input_0
+                5,          // stop_input_0
                 '#FED976',   // stop_output_1
-                50,          // stop_input_1
+                10,          // stop_input_1
                 '#FEB24C',   // stop_output_2
-                100,          // stop_input_2
+                20,          // stop_input_2
                 '#FD8D3C',   // stop_output_3
-                500,         // stop_input_3
+                40,         // stop_input_3
                 '#FC4E2A',   // stop_output_4
-                1000,         // stop_input_4
-                '#E31A1C',   // stop_output_5
-                2000,         // stop_input_5
-                '#BD0026',   // stop_output_6
-                5000,        // stop_input_6
-                "#800026"    // stop_output_7
+                60,         // stop_input_4
+                // '#E31A1C',   // stop_output_5
+                // 2000,         // stop_input_5
+                // '#BD0026',   // stop_output_6
+                // 5000,        // stop_input_6
+                "#800026"
             ],
             'fill-outline-color': '#BBBBBB',
             'fill-opacity': 0.7,
@@ -127,12 +127,12 @@ map.on('load', () => {
 
 
 const layers = [
-    '0-99',
-    '100-499',
-    '500-999',
-    '1000-1999',
-    '2000-5000',
-    '5000+'
+    '0-4',
+    '5-9',
+    '10-19',
+    '20-39',
+    '40-59',
+    '60+'
 ];
 const colors = [
     '#FED976',
@@ -144,7 +144,7 @@ const colors = [
 ];
 
 const legend = document.getElementById('legend');
-legend.innerHTML = "<b>Population with<br>low access to supermarkets</b>";
+legend.innerHTML = "<b>Population with<br>low access to supermarkets</b><br><b>(%)</b>";
 
 const source =
     '<p style="text-align: center; font-size:10pt">Source: <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/">USDA</a></p>';
@@ -201,7 +201,6 @@ function showCensusTractStats(e) {
         '<h3><b>County</3>: missing</h1>' +
         '<p><b>Population:</b> missing </p>' +
         '<p><b>Median Income:</b> missing</p>' +
-        '<p><b>Senior Rate (%):</b> missing</p>' +
         '<p><b>Poverty Rate: (%):</b> missing</p>';
         infoPanel.innerHTML = initialContent + newContent
     }
@@ -210,9 +209,54 @@ function showCensusTractStats(e) {
                     '<h3><b>' + feature.properties.County + '</b></h3>' +
                     '<p><b>Population:</b> ' + formatter(feature.properties.Pop2010) + '</p>' +
                     '<p><b>Median Income:</b> $' + formatter(feature.properties.MedianFamilyIncome) + '</p>' +
-                    '<p><b>Senior Rate (%):</b> ' + feature.properties.laseniorshalfshare + '</p>' +
-                    '<p><b>Poverty Rate: (%):</b> ' + feature.properties.PovertyRate + '</p>';
+                    '<div><canvas id="myChart1" class="chart"></canvas></div>' + 
+                    '<p><b>Poverty Rate: (%):</b> ' + feature.properties.PovertyRate + '</p>' +
+                    '<div><canvas id="myChart2" class="chart"></canvas></div>';
         infoPanel.innerHTML = initialContent + newContent
+        // charts
+        const ctx1 = document.getElementById('myChart1')
+        const ctx2 = document.getElementById('myChart2')
+
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+              labels: ['State Median Income Avg', 'Census Tract Median Income'],
+              datasets: [{
+                label: '$',
+                data: [87236.66, feature.properties.MedianFamilyIncome],
+                borderWidth: 1,
+                backgroundColor: [
+                    'rgba(110, 38, 14)',
+                ],
+                borderColor: [
+                    'rgba(110, 38, 14)',
+                ]
+              }]
+            },
+            options: {
+                indexAxis: 'y',
+            }
+        });
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+              labels: ['State Poverty Rate Avg %', 'Census Tract Poverty Rate %'],
+              datasets: [{
+                label: '%',
+                data: [12.05, feature.properties.PovertyRate],
+                borderWidth: 1,
+                backgroundColor: [
+                    '#9bb291',
+                ],
+                borderColor: [
+                    '#9bb291',
+                ]
+              }]
+            },
+            options: {
+                indexAxis: 'y',
+            }
+        });
     }
 }
 map.on('click', 'a', showCensusTractStats);
