@@ -201,7 +201,6 @@ function showCensusTractStats(e) {
         '<h3><b>County</3>: missing</h1>' +
         '<p><b>Population:</b> missing </p>' +
         '<p><b>Median Income:</b> missing</p>' +
-        '<p><b>Senior Rate (%):</b> missing</p>' +
         '<p><b>Poverty Rate: (%):</b> missing</p>';
         infoPanel.innerHTML = initialContent + newContent
     }
@@ -210,9 +209,54 @@ function showCensusTractStats(e) {
                     '<h3><b>' + feature.properties.County + '</b></h3>' +
                     '<p><b>Population:</b> ' + formatter(feature.properties.Pop2010) + '</p>' +
                     '<p><b>Median Income:</b> $' + formatter(feature.properties.MedianFamilyIncome) + '</p>' +
-                    '<p><b>Senior Rate (%):</b> ' + feature.properties.laseniorshalfshare + '</p>' +
-                    '<p><b>Poverty Rate: (%):</b> ' + feature.properties.PovertyRate + '</p>';
+                    '<div><canvas id="myChart1" class="chart"></canvas></div>' + 
+                    '<p><b>Poverty Rate: (%):</b> ' + feature.properties.PovertyRate + '</p>' +
+                    '<div><canvas id="myChart2" class="chart"></canvas></div>';
         infoPanel.innerHTML = initialContent + newContent
+        // charts
+        const ctx1 = document.getElementById('myChart1')
+        const ctx2 = document.getElementById('myChart2')
+
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+              labels: ['State Median Income Avg', 'Census Tract Median Income'],
+              datasets: [{
+                label: '$',
+                data: [87236.66, feature.properties.MedianFamilyIncome],
+                borderWidth: 1,
+                backgroundColor: [
+                    'rgba(110, 38, 14)',
+                ],
+                borderColor: [
+                    'rgba(110, 38, 14)',
+                ]
+              }]
+            },
+            options: {
+                indexAxis: 'y',
+            }
+        });
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+              labels: ['State Poverty Rate Avg %', 'Census Tract Poverty Rate %'],
+              datasets: [{
+                label: '%',
+                data: [12.05, feature.properties.PovertyRate],
+                borderWidth: 1,
+                backgroundColor: [
+                    '#9bb291',
+                ],
+                borderColor: [
+                    '#9bb291',
+                ]
+              }]
+            },
+            options: {
+                indexAxis: 'y',
+            }
+        });
     }
 }
 map.on('click', 'a', showCensusTractStats);

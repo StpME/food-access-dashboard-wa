@@ -16,6 +16,7 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
@@ -26,7 +27,10 @@
     <div id="container">
       <div id="side-panel">
         <h1 id="title">Washington Statistics</h1>
-        <p class="text-center" id="description"> Identifying which populations in WA state are most susceptible to food insecurity. Click on a census tract to learn more.</p>
+        <p class="text-center" id="description">
+          Identifying which populations in WA state are most susceptible to food
+          insecurity. Click on a census tract to learn more.
+        </p>
       </div>
       <div id="right-side">
         <div id="filter-bar">
@@ -36,13 +40,21 @@
               <p id="white" onclick="handleSwitch('lawhitehalfshare')">White</p>
               <p id="black" onclick="handleSwitch('lablackhalfshare')">Black</p>
               <p id="asian" onclick="handleSwitch('laasianhalfshare')">Asian</p>
-              <p id="hisp" onclick="handleSwitch('lahisphalfshare')">Hispanic</p>
-              <p id="native" onclick="handleSwitch('laaianhalfshare')">Native</p>
-              <p id="hi/pi" onclick="handleSwitch('lanhopihalfshare')">Hawaiian/PacIsl</p>
-              <p id="other" onclick="handleSwitch('laomultirhalfshare')">Other/Mixed</p>
+              <p id="hisp" onclick="handleSwitch('lahisphalfshare')">
+                Hispanic
+              </p>
+              <p id="native" onclick="handleSwitch('laaianhalfshare')">
+                Native
+              </p>
+              <p id="hi/pi" onclick="handleSwitch('lanhopihalfshare')">
+                Hawaiian/PacIsl
+              </p>
+              <p id="other" onclick="handleSwitch('laomultirhalfshare')">
+                Other/Mixed
+              </p>
             </div>
           </div>
-          <div class="dropdown"> 
+          <div class="dropdown">
             <button class="dropbtn" id="filter-btn">Other</button>
             <div class="dropdown-content">
               <p id="" onclick="handleSwitch('lakidshalfshare')">Kids</p>
@@ -68,10 +80,10 @@
       </div>
     </div>
 
-    <div class='map-overlay text-center' id='legend'></div>
+    <div class="map-overlay text-center" id="legend"></div>
     <!--Connect Scripts-->
     <script src="scripts/navbar.js"></script>
-    
+
     <script src="scripts/mapbox.js"></script>
 
     <script
