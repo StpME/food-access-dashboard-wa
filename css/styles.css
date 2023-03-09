@@ -196,6 +196,15 @@ body {
 .bg-brown {
     background-color: #E1BC85;
 }
+#about-info {
+    font-family: 'Open Sans', sans-serif;
+}
+#about-info span{
+    font-size: 20px;
+}
+#about-info a{
+    font-size: 25px;
+}
 
 /* Rounded slider styles*/
 
