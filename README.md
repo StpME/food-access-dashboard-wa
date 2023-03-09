@@ -16,3 +16,4 @@ Food desert dataset: https://www.ers.usda.gov/data-products/food-access-research
 County-level WA basemap: https://ofm.wa.gov/washington-data-research/population-demographics/gis-data/census-geographic-files
 
 [Figma prototype](https://www.figma.com/proto/ZYLyTinyaJQfqvegUBtp6e/GEOG%3A-Design-Prototype?node-id=8-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=8%3A2)
+[Map](https://stpme.github.io/food-access-dashboard-wa/)
