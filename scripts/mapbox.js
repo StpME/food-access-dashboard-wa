@@ -1,7 +1,7 @@
 
 
 
-let variable = "LAhalfand10";
+let variable = "LATracts_half";
 let previousVariable = variable;
 
 
@@ -15,19 +15,19 @@ function handleSwitch(filterVar) {
         'step',
         ['to-number', ['get', variable]],
         '#FFEDA0',   // stop_output_0
-        20,          // stop_input_0
+        5,          // stop_input_0
         '#FED976',   // stop_output_1
-        50,          // stop_input_1
+        10,          // stop_input_1
         '#FEB24C',   // stop_output_2
-        100,          // stop_input_2
+        20,          // stop_input_2
         '#FD8D3C',   // stop_output_3
-        500,         // stop_input_3
+        40,         // stop_input_3
         '#FC4E2A',   // stop_output_4
-        1000,         // stop_input_4
-        '#E31A1C',   // stop_output_5
-        2000,         // stop_input_5
-        '#BD0026',   // stop_output_6
-        5000,        // stop_input_6
+        60,         // stop_input_4
+        // '#E31A1C',   // stop_output_5
+        // 2000,         // stop_input_5
+        // '#BD0026',   // stop_output_6
+        // 5000,        // stop_input_6
         "#800026"
     ]);
 };
@@ -68,20 +68,20 @@ map.on('load', () => {
                 'step',
                 ['coalesce' , ['to-number', ['get', variable]], 0], // cast Pop2010 to a number
                 '#FFEDA0',   // stop_output_0
-                20,          // stop_input_0
+                5,          // stop_input_0
                 '#FED976',   // stop_output_1
-                50,          // stop_input_1
+                10,          // stop_input_1
                 '#FEB24C',   // stop_output_2
-                100,          // stop_input_2
+                20,          // stop_input_2
                 '#FD8D3C',   // stop_output_3
-                500,         // stop_input_3
+                40,         // stop_input_3
                 '#FC4E2A',   // stop_output_4
-                1000,         // stop_input_4
-                '#E31A1C',   // stop_output_5
-                2000,         // stop_input_5
-                '#BD0026',   // stop_output_6
-                5000,        // stop_input_6
-                "#800026"    // stop_output_7
+                60,         // stop_input_4
+                // '#E31A1C',   // stop_output_5
+                // 2000,         // stop_input_5
+                // '#BD0026',   // stop_output_6
+                // 5000,        // stop_input_6
+                "#800026"
             ],
             'fill-outline-color': '#BBBBBB',
             'fill-opacity': 0.7,
@@ -127,12 +127,12 @@ map.on('load', () => {
 
 
 const layers = [
-    '0-99',
-    '100-499',
-    '500-999',
-    '1000-1999',
-    '2000-5000',
-    '5000+'
+    '0-4',
+    '5-9',
+    '10-19',
+    '20-39',
+    '40-59',
+    '60+'
 ];
 const colors = [
     '#FED976',
@@ -144,7 +144,7 @@ const colors = [
 ];
 
 const legend = document.getElementById('legend');
-legend.innerHTML = "<b>Population with<br>low access to supermarkets</b>";
+legend.innerHTML = "<b>Population with<br>low access to supermarkets</b><br><b>(%)</b>";
 
 const source =
     '<p style="text-align: center; font-size:10pt">Source: <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/">USDA</a></p>';
