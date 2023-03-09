@@ -296,3 +296,8 @@ input:checked + .slider:before {
   }
 
 /* Rounded sliders styles*/
+
+.chart {
+    width: 400px;
+    height: 400px;
+}
