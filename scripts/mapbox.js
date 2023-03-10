@@ -9,6 +9,7 @@ let previousVariable = variable;
 function handleSwitch(filterVar) {
     variable = filterVar;
     console.log(variable)
+    setFilter(variable);
 
 
     map.setPaintProperty("a", 'fill-color', [
@@ -268,3 +269,46 @@ function formatter(value) {
     return str_value.replace(regex, '$1,');
 } 
  
+
+function setFilter(filter) {
+    const filterBtn = document.getElementById("filter-btn");
+    let display = "None";
+    if(filter === "lawhitehalfshare") {
+        display = "White";
+    }
+    if(filter === "lablackhalfshare") {
+        display = "Black";
+    }
+    if(filter === "laasianhalfshare") {
+        display = "Asian";
+    }
+    if(filter === "lahisphalfshare") {
+        display = "Hispanic";
+    }
+    if(filter === "laaianhalfshare") {
+        display = "Native";
+    }
+    if(filter === "lanhopihalfshare") {
+        display = "Hawaiian/PacIsl";
+    }
+    if(filter === "laomultirhalfshare") {
+        display = "Other/Mixed";
+    }
+    if(filter === "lakidshalfshare") {
+        display = "Kids";
+    }
+    if(filter === "laseniorshalfshare") {
+        display = "Seniors";
+    }
+    if(filter === "lalowihalfshare") {
+        display = "Low Income";
+    }
+    if(filter === "lahunvhalfshare") {
+        display = "No Vehicle";
+    }
+
+
+    filterBtn.innerText = `Filter: ${display}`;
+  }
+
+  

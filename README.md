@@ -3,7 +3,7 @@
 
 ![map demo](img/demo.gif)
 
-## Project Idea
+## Project Idea:
 Access to food is a fundamental need for every human being. However, there are areas and populations in the United States that have limited access to food, especially during the COVID-19 pandemic. This project aims to investigate the extent to which different minority groups are disproportionately affected by the issue of food access. By creating visualizations of food access conditions, we hope to raise public awareness and secure funding to help those in need across Washington state. We designed a food access dashboard that shows users which regions and which vulnerable populations are most affected by this phenomenon.
 
 ## Project Significance/Broader Impacts: 
