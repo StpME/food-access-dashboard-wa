@@ -34,7 +34,7 @@ function handleSwitch(filterVar) {
 };
 
 mapboxgl.accessToken =
-            'pk.eyJ1IjoiZGltZW50aW8iLCJhIjoiY2xhMngzZmEyMDRtdDN2bW93MjYyY2hvbSJ9.lBP2u-C8BEgug7_ye16y2g';
+            'pk.eyJ1IjoibXN0YXBlbHMiLCJhIjoiY213dXYzcTdyMDJ0aDJ5cHRmdHdxbGRhMSJ9.034XnuVNBSdwFzUGOZixtg';
 let map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/dark-v11', // style URL
